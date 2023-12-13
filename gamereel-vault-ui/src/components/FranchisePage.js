@@ -24,7 +24,7 @@ const FranchiseTable = ({ onFranchiseSelect }) => {
                 </TableHead>
                 <TableBody>
                     {franchises.map((franchise) => (
-                        <TableRow key={franchise.id} onClick={() => onFranchiseSelect(franchise)}>
+                        <TableRow key={franchise.franchise_id} onClick={() => onFranchiseSelect(franchise)}>
                             <TableCell component="th" scope="row">
                                 {franchise.name}
                             </TableCell>
@@ -66,7 +66,7 @@ const GamesTable = ({ franchise, onGameSelect }) => {
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        fetchGamesForFranchise(franchise.id).then(setGames);
+        fetchGamesForFranchise(franchise.franchise_id).then(setGames);
     }, [franchise]);
 
     return (
@@ -81,7 +81,7 @@ const GamesTable = ({ franchise, onGameSelect }) => {
                 </TableHead>
                 <TableBody>
                     {games.map((game) => (
-                        <TableRow key={game.id} onClick={() => onGameSelect(game)}>
+                        <TableRow key={game.game_id} onClick={() => onGameSelect(game)}>
                             <TableCell component="th" scope="row">
                                 {game.title}
                             </TableCell>
@@ -122,7 +122,7 @@ const FilesTable = ({ game }) => {
     const [files, setFiles] = useState([]);
 
     useEffect(() => {
-        fetchFilesForGame(game.id).then(setFiles);
+        fetchFilesForGame(game.game_id).then(setFiles);
     }, [game]);
 
     return (
@@ -137,7 +137,7 @@ const FilesTable = ({ game }) => {
                 </TableHead>
                 <TableBody>
                     {files.map((file) => (
-                        <TableRow key={file.id}>
+                        <TableRow key={file.file_id}>
                             <TableCell component="th" scope="row">
                                 {file.name}
                             </TableCell>
