@@ -16,13 +16,19 @@ const FranchiseTable = ({ onFranchiseSelect }) => {
     };
 
     const handleSaveFranchise = (franchiseData) => {
-        if (editingFranchise) {
-            // Update existing franchise logic
-        } else {
-            // Add new franchise logic
-        }
-        // After saving, refresh the franchises data
-        // ...
+        fetch('http://localhost:3000/api/franchises', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(franchiseData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .catch(error => console.error('Error adding franchise:', error));
+        // refresh data after save
     };
 
     useEffect(() => {
