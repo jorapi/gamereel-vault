@@ -14,6 +14,20 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET games for a specific franchise
+router.get('/:franchiseId/games', (req, res) => {
+    const franchiseId = req.params.franchiseId;
+    const query = 'SELECT * FROM games WHERE franchise_id = ?'; // Adjust this query based on your database schema
+
+    db.query(query, [franchiseId], (err, results) => {
+        if (err) {
+            res.status(500).send('Error retrieving games from database');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 // POST a new franchise
 router.post('/', (req, res) => {
     const { name, description } = req.body;
